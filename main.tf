@@ -12,7 +12,12 @@ user_data = <<-EOF
             echo "hello world" >index.html
             nohub busybox httpd -f -p 8080 &
             EOF
-
+tags = {
+    Name = "sandbox test"
+    Acct = "scottsand"
+    Nonsense = "you don't have to put out the red light"
+    }
+}
 resource "aws_security_group" "instance" {
     name = "sandbox-example-instance"
     ingress { 
@@ -23,9 +28,3 @@ resource "aws_security_group" "instance" {
     }
 }
 
-tags = {
-    Name = "sandbox test"
-    Acct = "scottsand"
-    Nonsense = "you don't have to put out the red light"
-    }
-}
