@@ -13,7 +13,7 @@ resource "aws_instance" "test" {
             nohub busybox httpd -f -p ${var.server_port} &
             EOF
 
-# interpolation ${...} replaced 8080  
+  # interpolation ${...} replaced 8080  
 
   tags = {
     Name     = "sandbox test"
@@ -29,17 +29,23 @@ resource "aws_security_group" "instance" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  egress {
+    from_port   = var.server_port
+    to_port     = var.server_port
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 # variable reference (line 24 and 25)
 variable "server_port" {
-    description = "port server will use for http requests"
-    type        = number
-    default     = 8080  
+  description = "port server will use for http requests"
+  type        = number
+  default     = 8080
 }
 
 # ouput variable
 output "public_ip" {
-    value       = aws_instance.test.public_ip
-    description = "the public IP of this test" 
+  value       = aws_instance.test.public_ip
+  description = "the public IP of this test"
 }
