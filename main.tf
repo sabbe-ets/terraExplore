@@ -13,7 +13,7 @@ resource "aws_instance" "test" {
             nohub busybox httpd -f -p ${var.server_port} &
             EOF
 
-  # interpolation ${...} replaced 8080  
+  # interpolation ${...} replaced 8080 
 
   tags = {
     Name     = "sandbox test"
@@ -24,16 +24,18 @@ resource "aws_instance" "test" {
 resource "aws_security_group" "sandbox_sg" {
   name = "sandbox-example-instance"
   ingress {
-    from_port   = var.server_port
-    to_port     = var.server_port
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port        = var.server_port
+    to_port          = var.server_port
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
   egress {
-    from_port   = var.server_port
-    to_port     = var.server_port
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port        = var.server_port
+    to_port          = var.server_port
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 }
 
