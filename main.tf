@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_instance" "test" {
   ami                    = "ami-098e42ae54c764c35"
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.instance.id]
+  vpc_security_group_ids = [aws_security_group.sandbox_sg.id]
 
   user_data = <<-EOF
             #!/bin/bash
@@ -21,7 +21,7 @@ resource "aws_instance" "test" {
     Nonsense = "you don't have to put out the red light"
   }
 }
-resource "aws_security_group" "instance" {
+resource "aws_security_group" "sandbox_sg" {
   name = "sandbox-example-instance"
   ingress {
     from_port   = var.server_port
